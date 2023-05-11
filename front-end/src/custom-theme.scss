@@ -1,0 +1,39 @@
+// Override default variables before the import
+
+$theme-colors: (
+  "custom-color": #ce640d,
+  "nav-color": #C5A163,
+  "button-color":#A4A197,
+);
+
+$enable-responsive-font-sizes:true;
+
+body {
+  background:url("./images/stefan-vladimirov-Q_Moi2xjieU-unsplash.jpg")no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+//used for vertical rule on navigation bar
+@media only screen and (min-width: 992px) {
+  .navbar .navbar-nav .nav-item .nav-link {
+    padding: 0 0.5em;
+  }
+  .navbar .navbar-nav .nav-item:not(:last-child) .nav-link {
+    border-right: 2px solid #e2e2e2;
+  }
+}
+
+.card,form{
+  opacity: 95%;
+}
+
+
+h2{
+color:white;
+}
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
