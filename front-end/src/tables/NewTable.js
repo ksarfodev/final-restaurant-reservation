@@ -28,12 +28,12 @@ function NewTable() {
       event.preventDefault();
       setError(null);
 
-      if (!formData.capacity || !formData.table_name) {
-        setError(
-          new Error("There's an issue with the capacity or table name.")
-        );
-        return;
-      }
+      // if (!formData.capacity || !formData.table_name) {
+      //   setError(
+      //     new Error("There's an issue with the capacity or table name.")
+      //   );
+      //   return;
+      // }
 
       formData.capacity = Number(formData.capacity);
 
@@ -46,7 +46,7 @@ function NewTable() {
         console.log("Aborted", formData);
       } else {
         setError(error);
-        throw error;
+       // throw error;
       }
     }
   };

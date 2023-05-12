@@ -54,7 +54,7 @@ function TablesList({ tables, setTables, setReservations, date }) {
         console.log("Aborted", date);
       } else {
         setError(error);
-        throw error;
+        //throw error;
       }
     }
   };

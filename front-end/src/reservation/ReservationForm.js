@@ -49,6 +49,7 @@ function ReservationForm({
             type="text"
             className="form-control"
             id="mobile_number"
+            pattern="^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$"
             required={true}
             minLength="7"
           />

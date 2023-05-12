@@ -76,7 +76,7 @@ function SeatReservation() {
         console.log("Aborted", formData);
       } else {
         setError(error);
-        throw error;
+        //throw error;
       }
     }
   };

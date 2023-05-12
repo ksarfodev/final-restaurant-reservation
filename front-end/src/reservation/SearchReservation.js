@@ -47,7 +47,7 @@ function SearchReservation() {
         console.log("Aborted", reservations);
       } else {
         setError(error);
-        throw error;
+       // throw error;
       }
     }
   };

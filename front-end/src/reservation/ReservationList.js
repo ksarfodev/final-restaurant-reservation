@@ -48,7 +48,7 @@ function ReservationList({ reservations }) {
         console.log("Aborted", reservation_id);
       } else {
         setError(error);
-        throw error;
+        //throw error;
       }
     }
   };

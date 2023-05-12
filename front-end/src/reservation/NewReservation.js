@@ -38,38 +38,38 @@ function NewReservation() {
       setError(null);
 
       //validations
-      let date = new Date(formData.reservation_date);
-      let day = date.getDay();
+      // let date = new Date(formData.reservation_date);
+      // let day = date.getDay();
 
-      if (!date) {
-        setDayError(new Error("The restaurant is closed on Tuesdays."));
-      }
+      // if (!date) {
+      //   setDayError(new Error("The restaurant is closed on Tuesdays."));
+      // }
 
-      if (day === 1) {
-        setDayError(new Error("The restaurant is closed on Tuesdays."));
-        return;
-      }
+      // if (day === 1) {
+      //   setDayError(new Error("The restaurant is closed on Tuesdays."));
+      //   return;
+      // }
 
-      if (date < new Date(today())) {
-        setPastDateError(new Error("Please select a current or future date."));
-        return;
-      }
+      // if (date < new Date(today())) {
+      //   setPastDateError(new Error("Please select a current or future date."));
+      //   return;
+      // }
 
       let reservationTimeDate = new Date(
         `${formData.reservation_date}, ${formData.reservation_time}`
       );
 
-      let resTime = formData.reservation_time;
-      let tenThirtyAMLimit = new Date("2023-4-28, 10:30");
-      let nineThirtyPMLimit = new Date("2023-4-28, 21:30");
-      let resTimeOnly = new Date(`2023-4-28, ${resTime}`);
+      // let resTime = formData.reservation_time;
+      // let tenThirtyAMLimit = new Date("2023-4-28, 10:30");
+      // let nineThirtyPMLimit = new Date("2023-4-28, 21:30");
+      // let resTimeOnly = new Date(`2023-4-28, ${resTime}`);
 
-      if (resTimeOnly > nineThirtyPMLimit || resTimeOnly < tenThirtyAMLimit) {
-        setWrongTimeError(
-          new Error("No reservations can be made at this time.")
-        );
-        return;
-      }
+      // if (resTimeOnly > nineThirtyPMLimit || resTimeOnly < tenThirtyAMLimit) {
+      //   setWrongTimeError(
+      //     new Error("No reservations can be made at this time.")
+      //   );
+      //   return;
+      // }
 
       // if (reservationTimeDate.getTime() < Date.now()) {
       //   setEarlierTimeError(
@@ -85,7 +85,7 @@ function NewReservation() {
       //make API call
       await createReservation(formData, abortController.signal);
 
-      console.log(formData.reservation_date. formData.reservation_time);
+      console.log(formData.reservation_date, formData.reservation_time);
 
       history.push(`/dashboard/?date=${formData.reservation_date}`);
     } catch (error) {
@@ -93,7 +93,7 @@ function NewReservation() {
         console.log("Aborted", formData);
       } else {
         setError(error);
-        throw error;
+        //throw error;
       }
     }
   };
