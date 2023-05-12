@@ -71,19 +71,21 @@ function NewReservation() {
         return;
       }
 
-      if (reservationTimeDate.getTime() < Date.now()) {
-        setEarlierTimeError(
-          new Error(
-            `${reservationTimeDate.getTime() },Sorry, reservations prior to the current time are not allowed.`
-          )
-        );
-        return;
-      }
+      // if (reservationTimeDate.getTime() < Date.now()) {
+      //   setEarlierTimeError(
+      //     new Error(
+      //       `${reservationTimeDate.getTime() },Sorry, reservations prior to the current time are not allowed.`
+      //     )
+      //   );
+      //   return;
+      // }
 
       formData.people = Number(formData.people);
 
       //make API call
       await createReservation(formData, abortController.signal);
+
+      console.log(formData.reservation_date. formData.reservation_time);
 
       history.push(`/dashboard/?date=${formData.reservation_date}`);
     } catch (error) {
