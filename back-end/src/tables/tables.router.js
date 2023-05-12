@@ -7,6 +7,9 @@ const methodNotAllowed = require("../errors/methodNotAllowed");
 
 const router = require("express").Router();
 const controller = require("./tables.controller");
+const cors = require("cors");
+
+router.use(cors());
 
 router.route("/:table_id([0-9]+)/seat")
 .put(controller.update)
