@@ -75,16 +75,21 @@ function isDateInPast(req, res, next) {
 }
 
 function isRestaurantOpened(req, res, next) {
-  let reservationDate = new Date(req.body.data.reservation_date);
-  let dayOfWeek = reservationDate.getDay();
-
-  if (dayOfWeek !== 1) {
-    return next();
+  const { reservation_date } = req.body.data;
+  const dateString = reservation_date.split("-");
+  const numDate = new Date(
+    Number(dateString[0]),
+    Number(dateString[1]) - 1,
+    Number(dateString[2]),
+    0,
+    0,
+    1
+  );
+  if (numDate.getDay() === 2) {
+    next({ status: 400, message: "restaurant is closed on Tuesdays" });
+  } else {
+    next();
   }
-  next({
-    status: 400,
-    message: `The restaurent is closed on this day`,
-  });
 }
 
 function isNotPastTime(req, res, next) {

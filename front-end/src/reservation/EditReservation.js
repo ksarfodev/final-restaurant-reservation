@@ -108,7 +108,8 @@ function EditReservation() {
 
       //make API call
       await updateReservation(formData, abortController.signal);
-
+      
+  console.log(formData.reservation_date)
       history.push(`/dashboard/?date=${formData.reservation_date}`);
 
     } catch (error) {
