@@ -74,7 +74,7 @@ function NewReservation() {
       if (reservationTimeDate.getTime() < Date.now()) {
         setEarlierTimeError(
           new Error(
-            "Sorry, reservations prior to the current time are not allowed."
+            `${reservationTimeDate.getTime() },Sorry, reservations prior to the current time are not allowed.`
           )
         );
         return;
