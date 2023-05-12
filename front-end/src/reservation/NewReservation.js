@@ -113,7 +113,6 @@ function NewReservation() {
   return (
     <>
       <h2 className="m-4">New Reservation</h2>
-      {/* Form */}
       <ErrorAlert error={error} />
       <ErrorAlert className="alert alert-danger" error={dayError} />
       <ErrorAlert className="alert alert-danger" error={pastDateError} />

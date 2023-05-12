@@ -58,6 +58,7 @@ function NewTable() {
   };
   return (
     <>
+    <h2 className="m-4">New Table</h2>
       <ErrorAlert error={error} />
       <form className="m-3 bg-white p-3" onSubmit={handleSubmit}>
         <div className="form-group">
