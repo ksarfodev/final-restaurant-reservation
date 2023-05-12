@@ -14,7 +14,7 @@ The intended user can visit the website using a mobile device or desktop compute
 The  server and client monorepo is deployed using Render  [demo](https://restaurant-reservation-p6rc.onrender.com/)
 
 
-## Languages & Frameworks used:
+## Languages & Frameworks used
 
 - React.js
 - Bootstrap 4.6
