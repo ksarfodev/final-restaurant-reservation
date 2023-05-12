@@ -50,11 +50,9 @@ function TablesList({ tables, setTables, setReservations, date }) {
       }
     } catch (error) {
       if (error.name === "AbortError") {
-        // Ignore `AbortError`
         console.log("Aborted", date);
       } else {
         setError(error);
-        //throw error;
       }
     }
   };

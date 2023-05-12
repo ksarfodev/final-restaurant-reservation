@@ -13,9 +13,6 @@ function SeatReservation() {
   const [formData, setFormData] = useState({ ...initialFormState });
 
   const [error, setError] = useState(null);
-  const [atCapacityError, setAtCapacityError] = useState(null);
-  const [reservationsError, setReservationsError] = useState(null);
-  const [tablesError, setTablesError] = useState(null);
 
   const { reservation_id } = useParams();
   const history = useHistory();
@@ -37,12 +34,12 @@ function SeatReservation() {
 
   function loadDashboard() {
     const abortController = new AbortController();
-    listTables(abortController.signal).then(setTables).catch(setTablesError);
+    listTables(abortController.signal).then(setTables).catch(setError);
 
     //make API call
     readReservation({ reservation_id }, abortController.signal)
       .then(setReservation)
-      .catch(setReservationsError);
+      .catch(setError);
 
     return () => abortController.abort();
   }
@@ -51,7 +48,7 @@ function SeatReservation() {
     const abortController = new AbortController();
     try {
       event.preventDefault();
-      setAtCapacityError(null);
+      setError(null);
 
       let selectedTable = tables.find(
         (table) => table.table_id === Number(formData.table_id)
@@ -65,7 +62,7 @@ function SeatReservation() {
         //make API call
         await assignTable(formData, abortController.signal);
       } else {
-        setAtCapacityError(new Error("Sorry, there isn't enough room at this table."));
+        setError(new Error("Sorry, there isn't enough room at this table."));
         return;
       }
 
@@ -76,7 +73,6 @@ function SeatReservation() {
         console.log("Aborted", formData);
       } else {
         setError(error);
-        //throw error;
       }
     }
   };
@@ -95,9 +91,6 @@ function SeatReservation() {
     <>
       <h2 className="ml-4">Seat Reservation</h2>
       <ErrorAlert className="alert alert-danger" error={error} />
-      <ErrorAlert className="alert alert-danger" error={atCapacityError} />
-      <ErrorAlert className="alert alert-danger" error={reservationsError} />
-      <ErrorAlert className="alert alert-danger" error={tablesError} />
 
       <div className="">
         <form className="bg-white m-4 p-3 " onSubmit={handleSubmit}>
