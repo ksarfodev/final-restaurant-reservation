@@ -92,12 +92,19 @@ function isRestaurantOpened(req, res, next) {
   }
 }
 
-function isNotPastTime(req, res, next) {
+function isNotElapsedTime(req, res, next) {
   let reservationTimeDate = new Date(
     `${req.body.data.reservation_date}, ${req.body.data.reservation_time}`
   );
 
-  if (reservationTimeDate.getTime() < Date.now()) {
+  let utcResDateTimeStr =  new Date(reservationTimeDate).toUTCString();
+  let utcDateTimeNowStr = new Date(Date.now()).toUTCString();
+
+  let utcReservationDateTimeObj = new Date(utcResDateTimeStr).getTime();
+  let utcDateTimeNowObj = new Date(utcDateTimeNowStr).getTime();
+
+
+  if (utcReservationDateTimeObj < utcDateTimeNowObj) {
     return next({
       status: 400,
       message: "Sorry, reservations prior to the current time are not allowed.",
@@ -271,7 +278,7 @@ module.exports = {
     validPartySize,
     isRestaurantOpened,
     isDateInPast,
-    isNotPastTime,
+    isNotElapsedTime,
     isNotTooEarlyOrLate,
 
     asyncErrorBoundary(create),
