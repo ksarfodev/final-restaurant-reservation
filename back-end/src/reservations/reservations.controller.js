@@ -108,7 +108,9 @@ function isNotElapsedTime(req, res, next) {
     return next({
       status: 400,
       message: `Sorry, reservations prior to the current time are not allowed. ${utcResDateTimeStr}
-      Current time: ${utcDateTimeNowStr}`,
+      Current time: ${utcDateTimeNowStr}
+      utcResDateTimeStr =${utcResDateTimeStr}
+      new Date(reservationTimeDate)>>${reservationTimeDate}`,
     });
   }
   next();
