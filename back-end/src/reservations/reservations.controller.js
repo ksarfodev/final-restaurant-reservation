@@ -59,13 +59,20 @@ function validDate(req, res, next) {
 }
 
 function isDateInPast(req, res, next) {
-  let reservationDate = new Date(req.body.data.reservation_date);
-  let tempDate = new Date();
-  let yesterday = new Date(
-    tempDate.setDate(new Date(Date.now()).getDate() - 1)
-  );
+  //combine date and time for accuracy
+  // let dateTime = `${req.body.data.reservation_date} ${req.body.data.reservation_time}`;
+  // let reservationDate = new Date(dateTime).toUTCString();
+  // let tempDate = new Date();
+  // let yesterday = new Date(
+  //   tempDate.setDate(new Date(Date.now()).getDate() - 1)
+  // );
 
-  if (reservationDate > yesterday) {
+  let reservationDateUtc = req.body.data.utcDateTimeString;
+
+  let yesterdayUtc = new Date( new Date().setDate(new Date(Date.now()).getDate() - 1)).toUTCString()
+
+
+  if (new Date(reservationDateUtc).getTime() > new Date(yesterdayUtc).getTime()) {
     return next();
   }
   next({
@@ -93,24 +100,20 @@ function isRestaurantOpened(req, res, next) {
 }
 
 function isNotElapsedTime(req, res, next) {
-  let reservationTimeDate = new Date(
-    `${req.body.data.reservation_date}, ${req.body.data.reservation_time}`
-  );
 
-  let utcResDateTimeStr =  new Date(reservationTimeDate).toUTCString();
+
+  let utcResDateTimeStr = req.body.data.utcDateTimeString;//new Date(utcResDateTimeStr).getTime();
   let utcDateTimeNowStr = new Date(Date.now()).toUTCString();
 
-  let utcReservationDateTimeObj = new Date(utcResDateTimeStr).getTime();
+  let utcResDateTimeObj = new Date(utcResDateTimeStr).getTime();
   let utcDateTimeNowObj = new Date(utcDateTimeNowStr).getTime();
 
 
-  if (utcReservationDateTimeObj < utcDateTimeNowObj) {
+  if (utcResDateTimeObj < utcDateTimeNowObj) {
     return next({
       status: 400,
-      message: `Sorry, reservations prior to the current time are not allowed. ${utcResDateTimeStr}
-      Current time: ${utcDateTimeNowStr}
-      utcResDateTimeStr =${utcResDateTimeStr}
-      new Date(reservationTimeDate)>>${reservationTimeDate}`,
+      message: `Sorry, reservations prior to the current time are not allowed. ${utcDateTimeNowStr} UTC`
+
     });
   }
   next();
