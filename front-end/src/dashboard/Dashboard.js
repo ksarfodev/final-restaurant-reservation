@@ -43,7 +43,6 @@ function Dashboard({ date }) {
     <main>
 
       <h1 className="ml-4 text-white">Dashboard</h1>
-      <h2 className="ml-4 text-white">{currTime}</h2>
       <div className="text-white d-md-flex mb-3">
         <h4 className="ml-4 mb-0">Reservations for {date}</h4>
       </div>

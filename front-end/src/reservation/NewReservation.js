@@ -15,12 +15,13 @@ function NewReservation() {
     reservation_date: "",
     reservation_time: "",
     people: "1",
+    dateTimeUtc:""
   };
   const [formData, setFormData] = useState({ ...initialFormState });
 
   const history = useHistory();
 
-  //   //api call to create a new deck based on form data
+  //api call to create a new deck based on form data
   const handleSubmit = async (event) => {
     const abortController = new AbortController();
     try {
@@ -30,26 +31,11 @@ function NewReservation() {
 
       formData.people = Number(formData.people);
 
-      // const re = /^\\b([01]?[0-9]|2[0-3]):([0-5][0-9])(?::([0-9][0-9]))?\\b$/;
-      // // let re = new RegExp('\b([01]?[0-9]|2[0-3]):([0-5][0-9])(?::([0-9][0-9]))?\b');
-      
-    //  formData.utcDateTimeString = new Date(`${formData.reservation_date} ${formData.reservation_time}`).toUTCString();
-
-      // var result= String(utcTime.getUTCHours()).padStart(2, '0') + ':'+ 
-      // String(utcTime.getUTCMinutes()).padStart(2, '0')  +':'+ 
-      // String(utcTime.getUTCSeconds()).padStart(2,'0');
-
-
-      // formData.reservation_time = result
-let dateTime = `${formData.reservation_date} ${formData.reservation_time}`
-
-      console.log(new Date(dateTime).toUTCString());
-
+      let dateTime = `${formData.reservation_date} ${formData.reservation_time}`
+      formData.dateTimeUtc = new Date(dateTime).toUTCString();
 
       //make API call
       await createReservation(formData, abortController.signal);
-
-      console.log(formData.reservation_date, formData.reservation_time);
 
       history.push(`/dashboard/?date=${formData.reservation_date}`);
     } catch (error) {

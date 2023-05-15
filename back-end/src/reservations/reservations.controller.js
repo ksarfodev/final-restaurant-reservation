@@ -59,22 +59,20 @@ function validDate(req, res, next) {
 }
 
 function isDateInPast(req, res, next) {
-  //combine date and time for accuracy
-  // let dateTime = `${req.body.data.reservation_date} ${req.body.data.reservation_time}`;
-  // let reservationDate = new Date(dateTime).toUTCString();
-  // let tempDate = new Date();
-  // let yesterday = new Date(
-  //   tempDate.setDate(new Date(Date.now()).getDate() - 1)
-  // );
 
-  let temp = `${req.body.data.reservation_date} ${req.body.data.reservation_time}`;
+  let dateTime ="";
 
-  let reservationDateUtc = new Date(temp).toUTCString();
+  if(req.body.data.dateTimeUtc){
+    dateTime =  req.body.data.dateTimeUtc
+  }else{
+    dateTime = `${req.body.data.reservation_date} ${req.body.data.reservation_time}`;
+  }
+
+  let reservationDateUtc = new Date(dateTime).toUTCString();
 
   let todayUtc = new Date(Date.now()).toUTCString();
 
   let yesterdayUtc = new Date(new Date().setDate(new Date(todayUtc).getDate() -1)).toUTCString()
-
 
 
   if (new Date(reservationDateUtc).getTime() > new Date(yesterdayUtc).getTime()) {
@@ -105,8 +103,13 @@ function isRestaurantOpened(req, res, next) {
 }
 
 function isNotElapsedTime(req, res, next) {
+  let dateTime ="";
 
-  let dateTime =  `${req.body.data.reservation_date} ${req.body.data.reservation_time}`
+  if(req.body.data.dateTimeUtc){
+    dateTime =  req.body.data.dateTimeUtc
+  }else{
+    dateTime = `${req.body.data.reservation_date} ${req.body.data.reservation_time}`
+  }
 
   let utcResDateTimeStr = new Date(dateTime).toUTCString();
   let utcDateTimeNowStr = new Date(Date.now()).toUTCString();
@@ -127,6 +130,7 @@ function isNotElapsedTime(req, res, next) {
 }
 
 function isNotTooEarlyOrLate(req, res, next) {
+
   let resTime = req.body.data.reservation_time;
 
   let tenThirtyAMLimit = new Date("2023-4-28, 10:30");
@@ -256,7 +260,14 @@ async function update(req, res, next) {
 
 async function updateReservation(req, res, next) {
   const updatedReservation = {
-    ...req.body.data,
+    reservation_id:res.locals.reservation.reservation_id,
+    first_name:req.body.data.first_name,
+    last_name:req.body.data.last_name,
+    mobile_number:req.body.data.mobile_number,
+    reservation_date:req.body.data.reservation_date,
+    reservation_time:req.body.data.reservation_time,
+    people:req.body.data.people,
+    status:req.body.data.status
   };
 
   const currentStatus = res.locals.reservation.status;
