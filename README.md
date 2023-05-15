@@ -115,7 +115,7 @@ Update a specified reservation with a matching reservation_id
 ```
 
 #### `GET /reservations/:reservation_id/status`
-Return the status of a specified reservation. A valid status is as follows: booked, seated,cancelled or finished
+Return the status of a specified reservation. A valid status is as follows: booked, seated, cancelled or finished
 
 #### `GET /tables`
 This route will respond with a list of all tables created in database.
@@ -128,8 +128,8 @@ This route will allow the creation of new tables
 ```
 {
     "data":{
-		"table_name": "#party table",
-        "capacity": 99
+	    "table_name": "#party table",
+            "capacity": 99
     }
 }
 ```
@@ -144,7 +144,7 @@ Allows for seating a reservation at a certain table. The reservation_id value in
 ```
 {
     "data":{
-        "reservation_id":16
+            "reservation_id":16
     }
 }
 ```
