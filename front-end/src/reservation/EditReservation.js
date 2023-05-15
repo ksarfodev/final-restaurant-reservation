@@ -56,7 +56,7 @@ function EditReservation() {
       //the party size should be of type number
       formData.people = Number(formData.people);
 
-      formData.utcDateTimeString = new Date(`${formData.reservation_date} ${formData.reservation_time}`).toUTCString();
+      // formData.utcDateTimeString = new Date(`${formData.reservation_date} ${formData.reservation_time}`).toUTCString();
 
       //make API call
       await updateReservation(formData, abortController.signal);

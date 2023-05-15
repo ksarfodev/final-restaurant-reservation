@@ -67,9 +67,14 @@ function isDateInPast(req, res, next) {
   //   tempDate.setDate(new Date(Date.now()).getDate() - 1)
   // );
 
-  let reservationDateUtc = req.body.data.utcDateTimeString;
+  let temp = `${req.body.data.reservation_date} ${req.body.data.reservation_time}`;
 
-  let yesterdayUtc = new Date( new Date().setDate(new Date(Date.now()).getDate() - 1)).toUTCString()
+  let reservationDateUtc = new Date(temp).toUTCString();
+
+  let todayUtc = new Date(Date.now()).toUTCString();
+
+  let yesterdayUtc = new Date(new Date().setDate(new Date(todayUtc).getDate() -1)).toUTCString()
+
 
 
   if (new Date(reservationDateUtc).getTime() > new Date(yesterdayUtc).getTime()) {
@@ -101,8 +106,9 @@ function isRestaurantOpened(req, res, next) {
 
 function isNotElapsedTime(req, res, next) {
 
+  let dateTime =  `${req.body.data.reservation_date} ${req.body.data.reservation_time}`
 
-  let utcResDateTimeStr = req.body.data.utcDateTimeString;//new Date(utcResDateTimeStr).getTime();
+  let utcResDateTimeStr = new Date(dateTime).toUTCString();
   let utcDateTimeNowStr = new Date(Date.now()).toUTCString();
 
   let utcResDateTimeObj = new Date(utcResDateTimeStr).getTime();

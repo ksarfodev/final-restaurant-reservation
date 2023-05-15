@@ -15,7 +15,6 @@ function NewReservation() {
     reservation_date: "",
     reservation_time: "",
     people: "1",
-    utcDateTimeString:""
   };
   const [formData, setFormData] = useState({ ...initialFormState });
 
@@ -34,7 +33,7 @@ function NewReservation() {
       // const re = /^\\b([01]?[0-9]|2[0-3]):([0-5][0-9])(?::([0-9][0-9]))?\\b$/;
       // // let re = new RegExp('\b([01]?[0-9]|2[0-3]):([0-5][0-9])(?::([0-9][0-9]))?\b');
       
-     formData.utcDateTimeString = new Date(`${formData.reservation_date} ${formData.reservation_time}`).toUTCString();
+    //  formData.utcDateTimeString = new Date(`${formData.reservation_date} ${formData.reservation_time}`).toUTCString();
 
       // var result= String(utcTime.getUTCHours()).padStart(2, '0') + ':'+ 
       // String(utcTime.getUTCMinutes()).padStart(2, '0')  +':'+ 
