@@ -41,6 +41,9 @@ function NewReservation() {
 
 
       // formData.reservation_time = result
+let dateTime = `${formData.reservation_date} ${formData.reservation_time}`
+
+      console.log(new Date(dateTime).toUTCString());
 
 
       //make API call
