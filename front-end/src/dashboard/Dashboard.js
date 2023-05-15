@@ -17,6 +17,8 @@ function Dashboard({ date }) {
   const [tablesError, setTablesError] = useState(null);
   const [tables, setTables] = useState([]);
 
+  const[currTime,setCurrTime]= useState(new Date(Date.now()).toUTCString())
+
 
 
   useEffect(()=>{
@@ -25,6 +27,7 @@ function Dashboard({ date }) {
 
   function loadDashboard() {
     const abortController = new AbortController();
+    setCurrTime(new Date(Date.now()).toUTCString());
     setReservationsError(null);
     listReservations({ date }, abortController.signal)
       .then(setReservations)
@@ -38,7 +41,9 @@ function Dashboard({ date }) {
 
   return (
     <main>
+
       <h1 className="ml-4 text-white">Dashboard</h1>
+      <h2 className="ml-4 text-white">{currTime}</h2>
       <div className="text-white d-md-flex mb-3">
         <h4 className="ml-4 mb-0">Reservations for {date}</h4>
       </div>
