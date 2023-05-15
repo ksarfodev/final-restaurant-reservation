@@ -9,9 +9,9 @@ The intended user can visit the website using a mobile device or desktop compute
 
 ### Live Demo
 
-**Note**: The Edit and Seat buttons currently do not work as intended on the Render deployed instance
+**Note**: Test UTC fix on Render-Preview
 
-The  server and client monorepo is deployed using Render  [demo](https://restaurant-reservation-p6rc.onrender.com/)
+
 
 
 ## Languages & Frameworks used
